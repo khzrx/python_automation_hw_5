@@ -22,7 +22,7 @@ class StudentRegistrationPage:
         browser.element('#userEmail').type(value)
         return self
 
-    def fill_gender(self, value):
+    def choose_gender(self, value):
         browser.all('.custom-radio').element_by(have.text(value)).click()
         return self
 
@@ -37,15 +37,15 @@ class StudentRegistrationPage:
         browser.element(f'.react-datepicker__day--0{day:0>2}').click()
         return self
 
-    def fill_subject(self, value):
+    def choose_subject(self, value):
         browser.element('#subjectsInput').type(value).press_enter()
         return self
 
-    def fill_hobbies(self, value):
+    def choose_hobbies(self, value):
         browser.all('[for^="hobbies-checkbox"]').element_by(have.exact_text(value)).click()
         return self
 
-    def fill_picture(self, filename):
+    def upload_picture(self, filename):
         browser.element('#uploadPicture').send_keys(resource.path(filename))
         return self
 
@@ -53,12 +53,12 @@ class StudentRegistrationPage:
         browser.element('#currentAddress').type(value)
         return self
 
-    def fill_state(self, value):
+    def choose_state(self, value):
         browser.element('#state').click()
         browser.element(f'//div[text()="{value}"]').click()
         return self
 
-    def fill_city(self, value):
+    def choose_city(self, value):
         browser.element('#city').click()
         browser.element(f'//div[text()="{value}"]').click()
         return self
