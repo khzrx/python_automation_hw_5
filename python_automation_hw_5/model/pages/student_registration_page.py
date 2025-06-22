@@ -1,4 +1,4 @@
-from selene import browser, have, be
+from selene import browser, have, be, command
 from selene.core.condition import Condition
 from python_automation_hw_5 import resource
 from python_automation_hw_5.data.users import Student
@@ -10,6 +10,10 @@ class StudentRegistrationPage:
     @allure.step('Открыть страницу регистрации студента.')
     def open(self):
         browser.open('https://demoqa.com/automation-practice-form')
+        browser.all('[id^=google_ads][id$=container__]').with_(timeout=10).wait_until(
+            have.size_greater_than_or_equal(3)
+        )
+        browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
         return self
 
     @allure.step('Заполнить имя значением {value}.')
@@ -67,7 +71,9 @@ class StudentRegistrationPage:
 
     @allure.step('Выбрать штат {value}.')
     def choose_state(self, value):
-        browser.element('#state').click()
+        state = browser.element('#state')
+        state.perform(command.js.scroll_into_view)
+        state.click()
         browser.element(f'//div[text()="{value}"]').click()
         return self
 

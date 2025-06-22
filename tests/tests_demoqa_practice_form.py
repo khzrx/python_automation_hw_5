@@ -1,17 +1,11 @@
-from selene import browser
-from selenium.webdriver.chrome.options import Options
 from python_automation_hw_5.data.users import Student
 from python_automation_hw_5.model.pages.student_registration_page import StudentRegistrationPage
 
-chrome_options = Options()
-chrome_options.page_load_strategy = 'eager'
-browser.config.driver_options = chrome_options
-browser.config.window_width = 1920
-browser.config.window_height = 1080
 
-
-def test_registration_student():
+def test_registration_student(setup_browser):
     registration = StudentRegistrationPage()
+    registration.browser = setup_browser
+
     student = Student(
         'Иван',
         'Иванов',
@@ -48,3 +42,4 @@ def test_registration_student():
     registration.should_be_visible_success_title()
     registration.should_have_registered(student)
     registration.should_be_clickable_modal_close_button()
+
