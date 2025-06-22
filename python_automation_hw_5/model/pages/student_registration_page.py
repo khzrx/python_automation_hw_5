@@ -10,10 +10,8 @@ class StudentRegistrationPage:
     @allure.step('Открыть страницу регистрации студента.')
     def open(self):
         browser.open('https://demoqa.com/automation-practice-form')
-        browser.all('[id^=google_ads][id$=container__]').with_(timeout=10).wait_until(
-            have.size_greater_than_or_equal(3)
-        )
-        browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
+        browser.driver.execute_script("$('footer').remove()")
+        browser.driver.execute_script("$('#fixedban').remove()")
         return self
 
     @allure.step('Заполнить имя значением {value}.')
@@ -56,7 +54,9 @@ class StudentRegistrationPage:
 
     @allure.step('Выбрать хобби со значением {value}.')
     def choose_hobbies(self, value):
-        browser.all('[for^="hobbies-checkbox"]').element_by(have.exact_text(value)).click()
+        hobby = browser.all('[for^="hobbies-checkbox"]').element_by(have.exact_text(value))
+        hobby.perform(command.js.scroll_into_view)
+        hobby.click()
         return self
 
     @allure.step('Добавить изображение {filename}.')
