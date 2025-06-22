@@ -1,10 +1,9 @@
 import pytest
 from dotenv import load_dotenv
 import os
-from selene import Browser, Config, browser
+from selene import browser
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-
 from python_automation_hw_5.utils import attach
 
 
