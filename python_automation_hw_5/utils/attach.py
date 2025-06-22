@@ -3,7 +3,6 @@ import allure
 from allure_commons.types import AttachmentType
 
 
-selenoid_url = os.getenv("SELENOID_URL")
 
 
 # Скриншоты
@@ -26,7 +25,8 @@ def add_html(browser):
 
 # скринкаст
 def add_video(browser):
-    video_url = f"{selenoid_url}/video/" + browser.driver.session_id + ".mp4"
+    selenoid_url = os.getenv("SELENOID_URL")
+    video_url = f"https://{selenoid_url}/video/" + browser.driver.session_id + ".mp4"
     html = "<html><body><video width='100%' height='100%' controls autoplay><source src='" \
            + video_url \
            + "' type='video/mp4'></video></body></html>"
