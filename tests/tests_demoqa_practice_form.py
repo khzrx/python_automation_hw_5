@@ -28,6 +28,7 @@ def test_registration_student():
         'Haryana',
         'Panipat'
     )
+
     registration.open()
 
     registration.fill_first_name(student.first_name)
